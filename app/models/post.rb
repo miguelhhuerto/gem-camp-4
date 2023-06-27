@@ -1,3 +1,4 @@
 class Post < ApplicationRecord
-  self.table_name = 'blog_lists'
+   validates :title, presence: true
+   validates :content, presence: true
 end
