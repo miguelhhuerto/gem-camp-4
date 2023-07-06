@@ -1,12 +1,16 @@
  <h1>Post List</h1>
 
+ <%= link_to 'Export', posts_path(format: :csv, page: params[:page]) %>
+
+ <%= link_to 'New Post', new_post_path %>
  <table>
      <thead>
      <td>Title</td>
      <td>Content</td>
      <td>Comments</td>
+     <td>comments count</td>
      <td>User</td>
-     <td>Category</td>
+     <td> <%= link_to 'Category', new_category_path %></td>
      <td>Action</td>
    </thead>
      <% @posts.each do |post| %>
@@ -14,6 +18,7 @@
          <td><%= post.title %></td>
          <td><%= post.content %></td>
            <td><%= post.comments.pluck(:content).join(',') %></td>
+           <td><%= post.comments_count %></td>
            <td><%= post.user&.email %></td>
            <td><%= post.categories.pluck(:name).join(',') %></td>
            <td>
@@ -26,4 +31,5 @@
        </tr>
        <% end %>
    </table>
- <%= link_to 'New', new_post_path %>
+
+ <%= paginate @posts %>
